@@ -1,0 +1,525 @@
+{
+	"info": {
+		"_postman_id": "fc5a6cdf-2ae8-4ebe-aaf5-8de4fef48e45",
+		"name": "GateKeeper",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26574483",
+		"_collection_link": "https://mission-leo.postman.co/workspace/Mission-Leo~e164db23-e29a-4904-acf7-5ff9c0fb744b/collection/26574483-fc5a6cdf-2ae8-4ebe-aaf5-8de4fef48e45?action=share&source=collection_link&creator=26574483"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : \"Subha\",\n    \"lastName\" : \"k\",\n    \"dob\" : \"2002-09-11\",\n    \"emailAddress\": \"subha@mail.com\",\n    \"gender\" : \"Female\",\n    \"password\": \"kind\",\n    \"role\" : \"GATE_KEEPER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/auth/login?email=kavya@mail.com&password=kind",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "kavya@mail.com"
+						},
+						{
+							"key": "password",
+							"value": "kind"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImthdmluQG1haWwuY29tIiwiaWF0IjoxNzM0OTY5MTcxLCJleHAiOjE3MzQ5Nzk5NzF9.hCMBHQg7TZFOTicl73kn9noNitb7HyoLtYwgzWi_tFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - list users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImthdmluQG1haWwuY29tIiwiaWF0IjoxNzM0OTY5NTYxLCJleHAiOjE3MzQ5ODAzNjF9.G1A04FUANm3kY663Sl4dNPigsNU9J4rBZVpHa__4Pzo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN -update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImthdmluQG1haWwuY29tIiwiaWF0IjoxNzM0OTY5NTYxLCJleHAiOjE3MzQ5ODAzNjF9.G1A04FUANm3kY663Sl4dNPigsNU9J4rBZVpHa__4Pzo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Kavya\",\n    \"lastName\": \"kopo\",\n    \"dob\": \"2002-09-11\",\n    \"gender\": \"Female\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/users/67697f145267690f7c6c11a0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users",
+						"67697f145267690f7c6c11a0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - delete user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImthdmluQG1haWwuY29tIiwiaWF0IjoxNzM0OTY5NTYxLCJleHAiOjE3MzQ5ODAzNjF9.G1A04FUANm3kY663Sl4dNPigsNU9J4rBZVpHa__4Pzo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/users/676989884278696466e1272f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users",
+						"676989884278696466e1272f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RESIDENT - list visitorPasses",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9SRVNJREVOVCIsInN1YiI6ImthdnlhQG1haWwuY29tIiwiaWF0IjoxNzM0OTc2OTc3LCJleHAiOjE3MzQ5ODc3Nzd9.OiKAZr03Y8WNjChDZ0E9GgArYNBi7ALfC0-rOqeS8us",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/resident/67697f145267690f7c6c11a0/visitors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"resident",
+						"67697f145267690f7c6c11a0",
+						"visitors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RESIDENT - list visitorPasses By Date",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9SRVNJREVOVCIsInN1YiI6ImthdnlhQG1haWwuY29tIiwiaWF0IjoxNzM0OTc2OTc3LCJleHAiOjE3MzQ5ODc3Nzd9.OiKAZr03Y8WNjChDZ0E9GgArYNBi7ALfC0-rOqeS8us",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/resident/67697f145267690f7c6c11a0/visitors?date=2025-04-19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"resident",
+						"67697f145267690f7c6c11a0",
+						"visitors"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2025-04-19"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RESIDENT - generate visitorPass",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9SRVNJREVOVCIsInN1YiI6ImthdnlhQG1haWwuY29tIiwiaWF0IjoxNzM0OTc2OTc3LCJleHAiOjE3MzQ5ODc3Nzd9.OiKAZr03Y8WNjChDZ0E9GgArYNBi7ALfC0-rOqeS8us",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"residentId\": \"67697f145267690f7c6c11a0\",\n    \"visitingTime\": \"2025-04-18\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/resident/visitors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"resident",
+						"visitors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RESIDENT - revoke visitorPass",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9SRVNJREVOVCIsInN1YiI6ImthdnlhQG1haWwuY29tIiwiaWF0IjoxNzM0OTc2OTc3LCJleHAiOjE3MzQ5ODc3Nzd9.OiKAZr03Y8WNjChDZ0E9GgArYNBi7ALfC0-rOqeS8us",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/resident/visitors/6769a9161adb95452d38085b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"resident",
+						"visitors",
+						"6769a9161adb95452d38085b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RESIDENT - blacklist user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9SRVNJREVOVCIsInN1YiI6ImthdnlhQG1haWwuY29tIiwiaWF0IjoxNzM0OTgyOTc5LCJleHAiOjE3MzQ5OTM3Nzl9.iS8q9ulazapkpoGl9rnmKiJMjZII4MSrX2DSr38ahwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\" : \"approved\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/resident/visitors/6769ae6adccd9a6265ffad96/blacklist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"resident",
+						"visitors",
+						"6769ae6adccd9a6265ffad96",
+						"blacklist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GATEKEEPER - list visitorPasses by date",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9HQVRFS0VFUEVSIiwic3ViIjoic3ViaGFAbWFpbC5jb20iLCJpYXQiOjE3MzQ5ODAwNjMsImV4cCI6MTczNDk5MDg2M30.A7kjhLUWhawYAbW9Evumy1D4gmo6RXOlk6npNGwgmiw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/gatekeeper/visitors?date=2025-04-10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gatekeeper",
+						"visitors"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2025-04-10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GATEKEEPER - verify user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9HQVRFS0VFUEVSIiwic3ViIjoic3ViaGFAbWFpbC5jb20iLCJpYXQiOjE3MzQ5ODAwNjMsImV4cCI6MTczNDk5MDg2M30.A7kjhLUWhawYAbW9Evumy1D4gmo6RXOlk6npNGwgmiw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\" : \"approved\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/gatekeeper/visitors/6769ae6adccd9a6265ffad96/blacklist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gatekeeper",
+						"visitors",
+						"6769ae6adccd9a6265ffad96",
+						"blacklist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITOR - check visitorPass",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/visitor/ENTRY-1734979178656",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"visitor",
+						"ENTRY-1734979178656"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

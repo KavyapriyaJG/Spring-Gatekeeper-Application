@@ -42,6 +42,14 @@ This project is a Spring Boot-based REST API for managing visitors in an apartme
 3. **Maven**: Ensure Maven is installed and configured.
  
 ---
+
+## Documentation
+ 
+### Postman API Collection
+
+import from `GateKeeper.postman_collection.json`
+
+---
  
 ## Setup Instructions
  
@@ -51,8 +59,6 @@ git clone https://github.com/KavyapriyaJG/Spring-Gatekeeper-Application.git
 ```
 
 ### Configure MongoDB
-example:
-
 ```yml
 spring:
   data:

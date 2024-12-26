@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://kavyajg1804:T3LLeXzJNnVFyHPa@kcluster.kmbuu.mongodb.net/?retryWrites=true&w=majority&appName=KCluster
+      database: housing_board
