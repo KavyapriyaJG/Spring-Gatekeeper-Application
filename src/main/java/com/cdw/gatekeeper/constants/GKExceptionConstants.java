@@ -20,9 +20,5 @@ public class GKExceptionConstants {
     public static final String GK014 = "GK014";
     public static final String GK015 = "GK015";
     public static final String GK016 = "GK016";
-    public static final String GK017 = "GK017";
-    public static final String GK018 = "GK018";
-    public static final String GK019 = "GK019";
-    public static final String GK020 = "GK020";
 
 }

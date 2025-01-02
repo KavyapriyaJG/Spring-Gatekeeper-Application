@@ -5,9 +5,14 @@ import com.cdw.gatekeeper.dto.VerificationRequestDTO;
 import com.cdw.gatekeeper.entities.VisitorPass;
 import com.cdw.gatekeeper.services.gatekeeperservices.GatekeeperService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -37,7 +42,7 @@ public class GatekeeperController {
         List<VisitorPass> visitorPasses = gatekeeperService.getAllVisitors(date);
 
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody(visitorPasses);
 
         return ResponseEntity.ok().body(successResponseDTO);
@@ -54,7 +59,7 @@ public class GatekeeperController {
         String verificationStatus = gatekeeperService.verifyVisitor(id, verificationRequestDTO);
 
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody(verificationStatus);
 
         return ResponseEntity.ok().body(successResponseDTO);

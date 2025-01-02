@@ -5,8 +5,9 @@ import com.cdw.gatekeeper.utils.ExceptionUtility;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.io.IOException;
@@ -14,38 +15,30 @@ import java.io.IOException;
 /**
  * GlobalExceptionHandler handles all exception thrown from the Gatekeeper controllers
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
      * Handles resource not found exceptions
      * @param ex
-     * @return ResponseEntity
+     * @return String
      */
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex) {
-
-        FailureResponseDTO failureResponseDTO = new FailureResponseDTO();
-        failureResponseDTO.setHttpStatus(ex.getHttpStatus());
-        failureResponseDTO.setMessage(ex.getMessage());
-
-        return new ResponseEntity<>(failureResponseDTO, ex.getHttpStatus());
+    public String handleResourceNotFoundException(ResourceNotFoundException ex) {
+        return ex.getMessage();
     }
 
 
     /**
      * Handles bad request exceptions
      * @param ex
-     * @return ResponseEntity
+     * @return String
      */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<FailureResponseDTO> handleBadRequestException(BadRequestException ex) {
-
-        FailureResponseDTO failureResponseDTO = new FailureResponseDTO();
-        failureResponseDTO.setHttpStatus(HttpStatus.BAD_REQUEST);
-        failureResponseDTO.setMessage(ex.getMessage());
-
-        return new ResponseEntity<>(failureResponseDTO, HttpStatus.BAD_REQUEST);
+    public String handleBadRequestException(BadRequestException ex) {
+        return ex.getMessage();
     }
 
 
@@ -60,7 +53,7 @@ public class GlobalExceptionHandler {
         ExceptionUtility exceptionUtility = new ExceptionUtility();
         FailureResponseDTO  failureResponseDTO = new FailureResponseDTO();
 
-        failureResponseDTO.setHttpStatus(ex.getHttpStatus());
+        failureResponseDTO.setSuccess(false);
         failureResponseDTO.setMessage(exceptionUtility.getPropertyCode(ex.getMessage()));
 
         return new ResponseEntity<>(failureResponseDTO, ex.getHttpStatus());
@@ -70,19 +63,12 @@ public class GlobalExceptionHandler {
     /**
      * Handles all other generic exceptions thrown
      * @param ex
-     * @return ResponseEntity
+     * @return String
      */
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<FailureResponseDTO> handleGlobalException(Exception ex) {
-
-        FailureResponseDTO failureResponseDTO = new FailureResponseDTO();
-        failureResponseDTO.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        failureResponseDTO.setMessage("OOPS something went wrong. Internal server error"); // string. since if written to fetch from properties, would need to indicate that it would thrown IOException on this global handler
-
-        return new ResponseEntity<>(failureResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+    public String handleGlobalException(Exception ex) {
+        return "OOPS something went wrong. Internal server error"; // string. since if written to fetch from properties, would need to indicate that it would thrown IOException on this global handler
     }
-
-
-
 }
 

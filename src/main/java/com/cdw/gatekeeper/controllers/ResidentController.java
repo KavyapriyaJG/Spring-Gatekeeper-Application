@@ -5,9 +5,16 @@ import com.cdw.gatekeeper.dto.VisitorDTO;
 import com.cdw.gatekeeper.entities.VisitorPass;
 import com.cdw.gatekeeper.services.residentservices.ResidentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -32,7 +39,7 @@ public class ResidentController {
         List<VisitorPass> visitorPasses = residentService.getAllVisitorsByResidentIdAndDate(residentId, date);
 
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody(visitorPasses);
 
         return ResponseEntity.ok().body(successResponseDTO);
@@ -48,7 +55,7 @@ public class ResidentController {
         residentService.scheduleVisitor(visitorDTO);
 
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody("Scheduled successfully !");
 
         return ResponseEntity.ok().body(successResponseDTO);
@@ -64,7 +71,7 @@ public class ResidentController {
         residentService.removeVisitor(id);
 
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody("Schedule cancelled successfully !");
 
         return ResponseEntity.ok().body(successResponseDTO);
@@ -80,7 +87,7 @@ public class ResidentController {
         String verificationStatus = residentService.blacklistVisitor(visitorId);
 
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody(verificationStatus);
 
         return ResponseEntity.ok().body(successResponseDTO);

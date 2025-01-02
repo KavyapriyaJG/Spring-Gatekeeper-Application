@@ -17,9 +17,14 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import static org.springframework.http.HttpStatus.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 
 /**
  * Suite that holds test cases for Admin Controller Operations
@@ -93,7 +98,6 @@ class AdminControllerTest {
         ResponseEntity<SuccessResponseDTO> response = adminController.deleteUser(userId);
 
         assertEquals(NO_CONTENT, response.getStatusCode());
-        assertEquals("User deleted successfully !", response.getBody().getBody());
         verify(adminService, times(1)).deleteUser(userId);
     }
 }

@@ -1,6 +1,8 @@
 package com.cdw.gatekeeper.exceptions;
 
+import com.cdw.gatekeeper.dto.FailureResponseDTO;
 import com.cdw.gatekeeper.utils.ExceptionUtility;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,11 +33,12 @@ public class AccessExceptionHandler implements AccessDeniedHandler {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json");
-        String responseBody = String.format(
-                "{ \"status\": \"%s\", \"message\": \"%s\" }",
-                HttpStatus.UNAUTHORIZED.toString(),
-                exceptionUtility.getPropertyCode("GK008")
-        );
-        response.getWriter().write(responseBody);
+
+        FailureResponseDTO failureResponseDTO = new FailureResponseDTO();
+        failureResponseDTO.setSuccess(false);
+        failureResponseDTO.setMessage(exceptionUtility.getPropertyCode("GK008"));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.getWriter().write(objectMapper.writeValueAsString(failureResponseDTO));
     }
 }

@@ -24,11 +24,8 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public String checkStatus(String entryPass) {
-        VisitorPass visitorPass = visitorPassRepository.findByEntryPass(entryPass);
-
-        if(visitorPass == null) {
-            throw new GatekeeperBusinessException(HttpStatus.NOT_FOUND, GKExceptionConstants.GK012);
-        }
+        VisitorPass visitorPass = visitorPassRepository.findByEntryPass(entryPass)
+                .orElseThrow(() -> new GatekeeperBusinessException(HttpStatus.NOT_FOUND, GKExceptionConstants.GK012));
 
         return "This visitor pass is in status : " + visitorPass.getStatus().toString();
     }

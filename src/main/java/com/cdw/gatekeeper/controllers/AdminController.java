@@ -7,9 +7,14 @@ import com.cdw.gatekeeper.entities.User;
 import com.cdw.gatekeeper.mappers.UserDTOMapper;
 import com.cdw.gatekeeper.services.adminservices.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -36,7 +41,7 @@ public class AdminController {
     public ResponseEntity<SuccessResponseDTO> getAllUsers() {
         List<User> users = adminService.getAllUsers();
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody(users);
 
         return ResponseEntity.ok().body(successResponseDTO);
@@ -51,7 +56,7 @@ public class AdminController {
         String verificationStatus = adminService.verifyUser(id, verificationRequestDTO);
 
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody(verificationStatus);
 
         return ResponseEntity.ok().body(successResponseDTO);
@@ -66,7 +71,7 @@ public class AdminController {
         adminService.updateUser(id, updateUserDTO);
 
         SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.OK);
+        successResponseDTO.setSuccess(true);
         successResponseDTO.setBody("Updated successfully !");
 
         return ResponseEntity.ok().body(successResponseDTO);
@@ -78,13 +83,9 @@ public class AdminController {
      * @return
      */
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<SuccessResponseDTO> deleteUser(@PathVariable String id) {
+    public ResponseEntity deleteUser(@PathVariable String id) {
         adminService.deleteUser(id);
 
-        SuccessResponseDTO successResponseDTO = new SuccessResponseDTO();
-        successResponseDTO.setHttpStatus(HttpStatus.NO_CONTENT);
-        successResponseDTO.setBody("User deleted successfully !");
-
-        return ResponseEntity.status(successResponseDTO.getHttpStatus()).body(successResponseDTO);
+        return ResponseEntity.noContent().build();
     }
 }

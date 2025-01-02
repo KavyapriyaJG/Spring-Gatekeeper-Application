@@ -12,8 +12,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -41,7 +45,7 @@ public class VisitorServiceImplTest {
 
     @Test
     void testCheckStatus_Success() {
-        when(visitorPassRepository.findByEntryPass("ENTRY-123")).thenReturn(visitorPass);
+        when(visitorPassRepository.findByEntryPass("ENTRY-123")).thenReturn(Optional.of(visitorPass));
 
         String result = visitorService.checkStatus("ENTRY-123");
 
@@ -51,7 +55,7 @@ public class VisitorServiceImplTest {
 
     @Test
     void testCheckStatus_VisitorPassNotFound() {
-        when(visitorPassRepository.findByEntryPass("ENTRY-456")).thenReturn(null);
+        when(visitorPassRepository.findByEntryPass("ENTRY-456")).thenReturn(Optional.empty());
 
         GatekeeperBusinessException exception = assertThrows(GatekeeperBusinessException.class, () ->
                 visitorService.checkStatus("ENTRY-456")

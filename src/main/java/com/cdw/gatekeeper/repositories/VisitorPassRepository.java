@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository for VisitorPass document
@@ -18,5 +19,5 @@ public interface VisitorPassRepository extends MongoRepository<VisitorPass, Stri
 
     List<VisitorPass> findByResidentIdAndVisitingTime(String residentId, LocalDate visitingTime);
 
-    VisitorPass findByEntryPass(String entryPass);
+    Optional<VisitorPass> findByEntryPass(String entryPass);
 }
